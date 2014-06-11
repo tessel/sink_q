@@ -1,6 +1,6 @@
 {
   "name": "sink_q",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Queue for holding events until they're ready to be fired",
   "main": "index.js",
   "scripts": {
