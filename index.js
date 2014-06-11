@@ -46,3 +46,5 @@ function decorateCallback (callback, decorator) {
     decorator();
   }
 }
+
+module.exports = Queue;
