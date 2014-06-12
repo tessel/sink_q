@@ -34,7 +34,7 @@ var Queue = function (queueReady) {
       callback = function() {};
     }
     if (resolveImmediate) {
-      ready();
+      self.ready();
     }
     fn(decorateCallback(callback, self.ready)); // Call Ready
   };
