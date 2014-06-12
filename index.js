@@ -1,10 +1,12 @@
+// TODO ADD DOCUMENTATION
+
 var Queue = function (queueReady) {
   var queue = [];
   var queueReady = queueReady | false;
   var self = this;
 
-  this.push = function (fn, callback) {
-    queue.push({fn:fn, callback:callback});
+  this.push = function (fn, callback, resolveImmediate) {
+    queue.push({fn:fn, callback:callback, resolveImmediate:resolveImmediate});
 
     if (queueReady) {
       pop();
@@ -22,11 +24,17 @@ var Queue = function (queueReady) {
       return;
     }
     lockQueue();
+    
     var obj = queue.shift();
     var fn = obj.fn;
     var callback = obj.callback;
+    var resolveImmediate = obj.resolveImmediate;
+
     if (callback == undefined) {
       callback = function() {};
+    }
+    if (resolveImmediate) {
+      ready();
     }
     fn(decorateCallback(callback, self.ready)); // Call Ready
   };
