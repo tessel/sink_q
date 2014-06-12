@@ -37,3 +37,33 @@ myQueue.push(function (callback) {
   async stuff with callback
 }, callback)
 ```
+
+If you push a function onto the queue whose callback pushes a function onto the queue you'll run into a deadlock. This happens because the outer function's callback won't be called until the queue unlocks and the queue remains locked until the outer function's callback is called. This is confusing so hopefully an example will explain it.
+```js
+myQueue.push(function (callback) {
+  myQueue.push(function () {
+    async stuff
+  })
+}, callback)
+
+```
+
+The solution to the deadlock is setting the setImmeadiate flag to true when you push a function which pushes a function onto the queue.
+```js
+myQueue.push(function (callback) {
+  myQueue.push(function () {
+    async stuff
+  })
+}, callback, true)
+```
+
+Notice that to resolve the deadlock we use
+```js
+myQueue.push(function (callback) {}, callback, true)
+```
+
+instead of 
+
+```js
+myQueue.push(function (callback) {}, callback)
+```
