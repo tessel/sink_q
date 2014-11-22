@@ -2,7 +2,7 @@
 
 var Queue = function (queueReady) {
   var queue = [];
-  var queueReady = queueReady | false;
+  var queueReady = !!queueReady;
   var self = this;
 
   this.push = function (fn, callback, resolveImmediate) {
