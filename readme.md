@@ -1,3 +1,5 @@
+**[UNMAINTAINED] This library does not have a maintainer. The source code and repository will be kept at this URL indefinitely. If you'd like to help maintain this codebase, create an issue on this repo explaining why you'd like to become a maintainer and tag @tessel/maintainers in the body.**
+
 #sink_q.js
 ###Intro
 This library is used for queuing async functions and flushing the queue when an on ready function is called. For example, if you need to run configuration code before a function can be called, its best to wrap the functions that need configuration in a call to queue.push and call queue.ready when the 'ready' event is emitted. This way, the configuration code will run first and the queue will be flushed automatically when 'ready' fires.
